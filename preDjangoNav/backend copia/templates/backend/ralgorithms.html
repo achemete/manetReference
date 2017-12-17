@@ -1,0 +1,96 @@
+<main>
+    <div class="counterStatsBar">
+        <h5>Documentation completed</h5>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="min-width:2em;width:80%">
+                80%
+            </div>
+        </div>
+        <h5>Documentation uploaded to the master branch</h5>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100" style="min-width:2em;width:30%">
+                30%
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="content-wrapper">
+        <div class="col-left">
+            <h3>Proactive Routing</h3>
+            <p>
+                This type of protocols maintains fresh lists of destinations and their routes by periodically distributing routing tables throughout the network. The main disadvantages of such algorithms are:
+                <ol class="tab">
+                    <li>Respective amount of data for maintenance.</li>
+                    <li>Slow reaction on restructuring and failures.</li>
+                </ol>
+                Examples of proactive algorithms are:
+                <ul class="tab">
+                    <li>Optimized Link State Routing Protocol (OLSR) RFC 3626, RFC 7181.</li>
+                    <li>Babel RFC 6126</li>
+                    <li>Destination Sequence Distance Vector (DSDV)</li>
+                    <li>DREAM</li>
+                    <li>B.A.T.M.A.N.</li>
+                </ul>
+                <img src="img/olsr.png" alt="OLSR" width="60%">
+            </p>
+            <figcaption>OLSR Routing Protocol Map</figcaption>
+            <p></p>
+            <h3>Reactive Routing</h3>
+            <p>
+                This type of protocol finds a route on demand by flooding the network with Route Request packets. The main disadvantages of such algorithms are:
+                <ol class="tab">
+                    <li>High latency time in route finding.</li>
+                    <li>Excessive flooding can lead to network clogging.</li>
+                </ol>
+                Examples of on-demand algorithms are:
+                <ul class="tab">
+                    <li>ABR - Associativity-Based Routing</li>
+                    <li>Ad hoc On-demand Distance Vector(AODV) (RFC 3561)</li>
+                    <li>Dynamic Source Routing (RFC 4728)</li>
+                    <li>Flow State in the Dynamic Source Routing[5]</li>
+                    <li>Power-Aware DSR-based</li>
+                </ul>
+                <img src="img/aodv.jpg" alt="AODV" width="75%">
+            </p>
+            <figcaption>AODV Routing Protocol Topology</figcaption>
+            <p></p>
+        </div>
+        <div class="col-right">
+            <h3>Hybrid Routing</h3>
+            <p>
+                This type of protocol combines the advantages of proactive and reactive routing. The routing is initially established with some proactively prospected routes and then serves the demand from additionally activated nodes through reactive flooding. The choice of one or the other method requires predetermination for typical cases.
+                <br> The main disadvantages of such algorithms are:
+                <ol class="tab">
+                    <li>Advantage depends on number of other nodes activated.</li>
+                    <li>Reaction to traffic demand depends on gradient of traffic volume.</li>
+                </ol>
+                Examples of hybrid algorithms are:
+                <ul class="tab">
+                    <li>ZRP (Zone Routing Protocol)[7] ZRP uses IARP as pro-active and IERP as reactive component.</li>
+                    <li>ZHLS (Zone-based Hierarchical Link State Routing Protocol)</li>
+                </ul>
+                <img src="img/zonerouting.jpg" alt="" width="65%">
+            </p>
+            <figcaption>ZRL Routing Protocol</figcaption>
+            <p></p>
+            <h3>Hierarchical Routing</h3>
+            <p>
+                With this type of protocol the choice of proactive and of reactive routing depends on the hierarchic level in which a node resides. The routing is initially established with some proactively prospected routes and then serves the demand from additionally activated nodes through reactive flooding on the lower levels. The choice for one or the other method requires proper attributation for respective levels. The main disadvantages of such algorithms are:
+                <ol class="tab">
+                    <li>Advantage depends on depth of nesting and addressing scheme.</li>
+                    <li>Reaction to traffic demand depends on meshing parameters.</li>
+                </ol>
+                Examples of hierarchical routing algorithms are:
+                <ul class="tab">
+                    <li>CBRP (Cluster Based Routing Protocol)</li>
+                    <li>FSR (Fisheye State Routing protocol)</li>
+                    <li>Order One Network Protocol; Fast logarithm-of-2 maximum times to contact nodes. Supports large groups.</li>
+                    <li>ZHLS (Zone-based Hierarchical Link State Routing Protocol)</li>
+                </ul>
+                <img src="img/hierarchical.jpg" alt="" width="45%">
+            </p>
+            <figcaption>Hierarchical Routing Protocol Topology</figcaption>
+            <p></p>
+        </div>
+    </div>
+</main>

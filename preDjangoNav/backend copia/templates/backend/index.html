@@ -1,0 +1,118 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Manet Reference</title>
+	<link rel="icon" href="./img/favicon.ico" type="image/x-icon">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<!-- check this... -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-circle-progress/1.2.2/circle-progress.min.js"></script>
+	<!-- Check.. -->
+	<link rel="stylesheet" href="{% static '../static/css/style.css' %}">
+	<link rel="stylesheet" href="{% static '../static/css/media.css' %}">
+	<script src="{% static '../static/js/main.js' %}"></script>
+</head>
+
+<!-- <body onload="loadHome()"> -->
+<body>
+	<header>
+		<div class="headerContent">
+			<div class="banner">
+				<h1><strong>Manet Reference</strong></h1>
+				<h4>Scientist information about <strong>manet</strong> <em>(mobile ad hoc network)</em> networks.</h4>
+			</div>
+		</div>
+	</header>
+	<nav class="navbar navbar">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav">
+					<li><a id="home" href="#"><img src="img/start.png" alt="home-icon"></a></li>
+					<li class="dropdown">
+						<a id="tools" class="dropdown-toggle" data-toggle="dropdown" href="#">Tools <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a class="btn disabled" id="t-simulators" href="#">Simulators</a></li>
+							<li><a class="btn disabled" id="t-scripts" href="#">Scripts</a></li>
+							<li><a class="btn disabled" id="t-plugins" href="#">Plug-ins</a></li>
+						</ul>
+					</li>
+					<li><a id="ralgos" href="#">Routing Algorithms</a></li>
+					<li><a class="btn disabled" id="handson" href="#">Hands-on Approach</a></li>
+					<li><a id="biblio" href="#">Bibliography</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a id="signup" class="btn disabled" href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+					<li><a id="login" href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<main id="main">
+		{% block content %}
+		{% endblock %}
+	</main>
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4 paddingtop-bottom info-footer">
+					<div class="logofooter">Manet Reference</div>
+					<p>Scientist information about manet (mobile ad hoc network) networks.</p>
+					<p><i class="fa fa-map-pin"></i> TU/e 5612 AZ Eindhoven</p>
+					<p><i class="fa fa-phone"></i> Phone (NL) : +31 040 247 9111</p>
+					<p><i class="fa fa-envelope"></i> E-mail : manetreference@tue.nl</p>
+				</div>
+				<div class="col-sm-4 paddingtop-bottom">
+					<h6 class="heading7">GENERAL LINKS</h6>
+					<ul class="footer-ul">
+						<li><a href="#">Meet the team</a></li>
+						<li><a href="#">Privacy Policy</a></li>
+						<li><a href="#">Terms & Conditions</a></li>
+						<li><a href="#">Frequently Ask Questions</a></li>
+					</ul>
+				</div>
+				<div class="col-sm-4 paddingtop-bottom">
+					<h6 class="heading7">LATEST POST</h6>
+					<div class="post">
+						<p>Generated automatically parsing news through some API, to implement yet (A2) <span>December 5,2017</span></p>
+						<p>Generated automatically parsing news through some API, to implement yet (A2) <span>October 30,2017</span></p>
+						<p>Generated automatically parsing news through some API, to implement yet (A2) <span>July 24,2017</span></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<div class="copyright">
+		<div class="container">
+			<div class="col-md-6">
+				<p>© <span id="license"></span></p>
+			</div>
+			<div class="col-md-6">
+				<ul class="bottom_ul">
+					<li><a href="#">Manet Reference</a></li>
+					<li><a href="#">About us</a></li>
+					<li><a href="#">Blog</a></li>
+					<li><a href="#">Community</a></li>
+					<li><a id="fContact" href="#">Contact us</a></li>
+					<li><a href="https://tue.nl" target="_blank">TU/e</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
