@@ -29,6 +29,10 @@ def home_list(request):
     sections = Section.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     return render(request, 'backend/home.html', {'sections': sections})
 
+def home_detail(request, pk):
+    section = get_object_or_404(Section, pk=pk)
+    return render(request, 'backend/home_detail.html', {'section': section})
+
 def homeSection_new(request):
     if request.method == "POST":
         form = PostSection(request.POST)
@@ -37,9 +41,23 @@ def homeSection_new(request):
             section.author = request.user
             section.published_date = timezone.now()
             section.save()
-            return redirect('home_list')#, pk=post.pk)
+            return redirect('home_detail', pk=section.pk)
     else:
         form = PostSection()
+    return render(request, 'backend/section_edit.html', {'form': form})
+
+def section_edit(request, pk):
+    section = get_object_or_404(Section, pk=pk)
+    if request.method == "POST":
+        form = PostSection(request.POST, instance=section)
+        if form.is_valid():
+            section = form.save(commit=False)
+            section.author = request.user
+            section.published_date = timezone.now()
+            section.save()
+            return redirect('home_detail', pk=section.pk)
+    else:
+        form = PostSection(instance=section)
     return render(request, 'backend/section_edit.html', {'form': form})
 
 def algSection_new(request):
@@ -50,14 +68,10 @@ def algSection_new(request):
             section.author = request.user
             section.published_date = timezone.now()
             section.save()
-            return redirect('home_list')#, pk=post.pk)
+            return redirect('home_list')#, pk=section.pk)
     else:
         form = PostSection()
     return render(request, 'backend/section_edit.html', {'form': form})
-
-def homeSection_detail(request, pk):
-    section = get_object_or_404(Section, pk=pk)
-    return render(request, 'backend/section_detail.html', {'section': section})
 
 '''
 def post_detail(request, pk):
@@ -77,17 +91,4 @@ def post_new(request):
         form = PostForm()
     return render(request, 'backend/post_edit.html', {'form': form})
 
-def post_edit(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    if request.method == "POST":
-        form = PostForm(request.POST, instance=post)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.published_date = timezone.now()
-            post.save()
-            return redirect('post_detail', pk=post.pk)
-    else:
-        form = PostForm(instance=post)
-    return render(request, 'backend/post_edit.html', {'form': form})
 '''

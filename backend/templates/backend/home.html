@@ -5,77 +5,77 @@
 
 <script src="{% static '../static/js/home.js' %}"></script>
 <div class="alert alert-warning alert-dismissible" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <strong>Please note:</strong> Some elements/functionalities are disabled or non-working and those, are going to be enabled with the A2 (assignment) update.
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	<strong>Please note:</strong> Some elements/functionalities are disabled or non-working and those, are going to be enabled with the A2 (assignment) update.
 </div>
 <hr>
 <div class="counterStats">
-    <h3>Our project in numbers</h3>
-    <div class="counterInner">
-        <h4>MANET resources</h4>
-        <div class="circle" data-value="0.75" data-thickness="04"></div>
-        <span><strong>75%</strong></span>
-    </div>
-    <div class="counterInner">
-        <h4>VANET resources</h4>
-        <div class="circle" data-value="0.1" data-thickness="04"></div>
-        <span><strong>33%</strong></span>
-    </div>
-    <div class="counterInner">
-        <h4>Simulator resources</h4>
-        <div class="circle" data-value="0.27" data-thickness="04"></div>
-        <span><strong>27%</strong></span>
-    </div>
-    <div class="counterInner">
-        <h4>Other resources</h4>
-        <div class="circle" data-value="0.33" data-thickness="04"></div>
-        <span><strong>10%</strong></span>
-    </div>
+	<h3>Our project in numbers</h3>
+	<div class="counterInner">
+		<h4>MANET resources</h4>
+		<div class="circle" data-value="0.75" data-thickness="04"></div>
+		<span><strong>75%</strong></span>
+	</div>
+	<div class="counterInner">
+		<h4>VANET resources</h4>
+		<div class="circle" data-value="0.1" data-thickness="04"></div>
+		<span><strong>33%</strong></span>
+	</div>
+	<div class="counterInner">
+		<h4>Simulator resources</h4>
+		<div class="circle" data-value="0.27" data-thickness="04"></div>
+		<span><strong>27%</strong></span>
+	</div>
+	<div class="counterInner">
+		<h4>Other resources</h4>
+		<div class="circle" data-value="0.33" data-thickness="04"></div>
+		<span><strong>10%</strong></span>
+	</div>
 </div>
 <hr>
 <div class="content-wrapper">
-    <div class="col-left">
-       
-        {% for section in sections %}
-            {% if user.is_authenticated %}
-            <h3><a href="{% url 'homeSection_detail' pk=section.pk %}">{{ section.title }}</a></h3>
-            {% else %}
-            <h3>{{ section.title }}</h3>
-            {% endif %}
-            <p>{{ section.text|linebreaksbr }}</p>
-        {% endfor %}
+	<div class="col-left">
+	   
+		{% for section in sections %}
+			{% if user.is_authenticated %}
+			<h3><a href="{% url 'home_detail' pk=section.pk %}">{{ section.title }}</a></h3>
+			{% else %}
+			<h3>{{ section.title }}</h3>
+			{% endif %}
+			<p>{{ section.text|linebreaksbr }}</p>
+		{% endfor %}
 
-        <h3>Manet Description</h3>
-        <p>
-            A mobile ad hoc network (MANET), also known as wireless ad hoc network or ad hoc wireless network, is a continuously self-configuring, infrastructure-less network of mobile devices connected wirelessly.
-            <br>
-            <br> Each device in a MANET is free to move independently in any direction, and will therefore change its links to other devices frequently. Each must forward traffic unrelated to its own use, and therefore be a router. The primary challenge in building a MANET is equipping each device to continuously maintain the information required to properly route traffic. Such networks may operate by themselves or may be connected to the larger Internet. They may contain one or multiple and different transceivers between nodes. This results in a highly dynamic, autonomous topology.
-            <br>
-            <br>
-            <img src="{% static '../static/img/manet.png' %}" alt="Manet topology">
-            <br>
-            <br> MANETs are a kind of wireless ad hoc network (WANET) that usually has a routable networking environment on top of a Link Layer ad hoc network. MANETs consist of a peer-to-peer, self-forming, self-healing network. MANETs circa 2000–2015 typically communicate at radio frequencies (30 MHz – 5 GHz).
-            <br>
-            <br> Different protocols are evaluated based on measures such as the packet drop rate, the overhead introduced by the routing protocol, end-to-end packet delays, network throughput, ability to scale, etc.
-        </p>
-    </div>
-    <div class="col-right">
-        <h3>Get Involved</h3>
-        <p>
-            <img src="{% static '../static/img/nsf.jpg' %}" alt="Join Us" style="margin-left:3px" align="right" width="30%"> <span class="firstcharacter">H</span>ello young scientist! I heard that you are interested to be a part of this growing team. So, congratulations and in behalf of our members and supervisors, <strong>welcome!</strong><br>Once again, I would like to welcome you! All efforts are really appreciated to our projects. If you have never contributed to a scientist project before and you’re just getting started, consider exploring these resources.
-            <br>
-            <ul class="tab">
-                <li><a href="https://scistarter.com/">https://scistarter.com/</a> is a site that aggregates (rolls up and makes easy to explore) projects that actively want help. They label those projects with things like “up-for-grabs”, “jump-in” or “help wanted.”</li>
-                <br>
-                <li>Read blog posts and guides on how to contribute to a scientist project!</li>
-                <br>
-                <li>If you’re just getting started with tech and are considering being a social young scientist, I've made a documentary training movie for you! Get Involved in Tech walks you through setting up your GitHub account, exploring ResearchGate, setting up a blog and starting to tweet!</li>
-            </ul>
-            Wondering what someone else’s first contribution was? You can easily find out any GitHub username’s “First Pull Request” here! (I think you’ll find that most people’s first PRs were relatively small like Kent’s). We think that open source projects should value civility and kindness and be patient with new developers and we encourage you to explore projects that have a published Code of Conduct and we hope you do too!
-            <br><br>
-            <img src="{% static '../static/img/community.jpg' %}" alt="Join us">
-            <br> Different protocols are evaluated based on measures such as the packet drop rate, the overhead introduced by the routing protocol, end-to-end packet delays, network throughput, ability to scale, etc.
-        </p>
-    </div>
+		<h3>Manet Description</h3>
+		<p>
+			A mobile ad hoc network (MANET), also known as wireless ad hoc network or ad hoc wireless network, is a continuously self-configuring, infrastructure-less network of mobile devices connected wirelessly.
+			<br>
+			<br> Each device in a MANET is free to move independently in any direction, and will therefore change its links to other devices frequently. Each must forward traffic unrelated to its own use, and therefore be a router. The primary challenge in building a MANET is equipping each device to continuously maintain the information required to properly route traffic. Such networks may operate by themselves or may be connected to the larger Internet. They may contain one or multiple and different transceivers between nodes. This results in a highly dynamic, autonomous topology.
+			<br>
+			<br>
+			<img src="{% static '../static/img/manet.png' %}" alt="Manet topology">
+			<br>
+			<br> MANETs are a kind of wireless ad hoc network (WANET) that usually has a routable networking environment on top of a Link Layer ad hoc network. MANETs consist of a peer-to-peer, self-forming, self-healing network. MANETs circa 2000–2015 typically communicate at radio frequencies (30 MHz – 5 GHz).
+			<br>
+			<br> Different protocols are evaluated based on measures such as the packet drop rate, the overhead introduced by the routing protocol, end-to-end packet delays, network throughput, ability to scale, etc.
+		</p>
+	</div>
+	<div class="col-right">
+		<h3>Get Involved</h3>
+		<p>
+			<img src="{% static '../static/img/nsf.jpg' %}" alt="Join Us" style="margin-left:3px" align="right" width="30%"> <span class="firstcharacter">H</span>ello young scientist! I heard that you are interested to be a part of this growing team. So, congratulations and in behalf of our members and supervisors, <strong>welcome!</strong><br>Once again, I would like to welcome you! All efforts are really appreciated to our projects. If you have never contributed to a scientist project before and you’re just getting started, consider exploring these resources.
+			<br>
+			<ul class="tab">
+				<li><a href="https://scistarter.com/">https://scistarter.com/</a> is a site that aggregates (rolls up and makes easy to explore) projects that actively want help. They label those projects with things like “up-for-grabs”, “jump-in” or “help wanted.”</li>
+				<br>
+				<li>Read blog posts and guides on how to contribute to a scientist project!</li>
+				<br>
+				<li>If you’re just getting started with tech and are considering being a social young scientist, I've made a documentary training movie for you! Get Involved in Tech walks you through setting up your GitHub account, exploring ResearchGate, setting up a blog and starting to tweet!</li>
+			</ul>
+			Wondering what someone else’s first contribution was? You can easily find out any GitHub username’s “First Pull Request” here! (I think you’ll find that most people’s first PRs were relatively small like Kent’s). We think that open source projects should value civility and kindness and be patient with new developers and we encourage you to explore projects that have a published Code of Conduct and we hope you do too!
+			<br><br>
+			<img src="{% static '../static/img/community.jpg' %}" alt="Join us">
+			<br> Different protocols are evaluated based on measures such as the packet drop rate, the overhead introduced by the routing protocol, end-to-end packet delays, network throughput, ability to scale, etc.
+		</p>
+	</div>
 </div>
 {% endblock %}
