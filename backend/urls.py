@@ -1,4 +1,5 @@
-from django.conf.urls import url
+from django.conf.urls import include, url
+#from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
@@ -17,5 +18,10 @@ urlpatterns = [
     url(r'^biblio/algorithms/$', views.BiblioPageView.as_view(), name='b-algs'),
 
     url(r'^signup/$', views.signup, name='signup'),
+
+    url(r'^accounts/', include('django.contrib.auth.urls')),
+
+    #url(r'^login/$', auth_views.login, {'backend': 'login.html'}, name='login'),
+    #url(r'^logout/$', auth_views.logout, {'backend': 'logout.html'}, name='logout'),
 
 ]
