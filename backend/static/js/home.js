@@ -1,3 +1,4 @@
+console.log("I should load circles");
 let temp = parseInt($(".circle span").text())
 $('.circle').circleProgress({
     fill: {gradient: ['red', 'orange']},

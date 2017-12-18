@@ -35,6 +35,16 @@
 <hr>
 <div class="content-wrapper">
     <div class="col-left">
+       
+        {% for section in sections %}
+            {% if user.is_authenticated %}
+            <h3><a href="{% url 'homeSection_detail' pk=section.pk %}">{{ section.title }}</a></h3>
+            {% else %}
+            <h3>{{ section.title }}</h3>
+            {% endif %}
+            <p>{{ section.text|linebreaksbr }}</p>
+        {% endfor %}
+
         <h3>Manet Description</h3>
         <p>
             A mobile ad hoc network (MANET), also known as wireless ad hoc network or ad hoc wireless network, is a continuously self-configuring, infrastructure-less network of mobile devices connected wirelessly.

@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 # Create your views here.
 from django.utils import timezone
 from .models import Section
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView 
-#from .forms import SectionForm
+from .forms import PostSection
 
 class HomePageView(TemplateView):
     template_name = "backend/home.html"
@@ -25,9 +25,39 @@ class RefPageView(TemplateView):
 #     sections = Section.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
 #     return render(request, 'backend/index.html', {'sections': sections})
 
-# def home_list(request):
-#     sections = Section.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-#     return render(request, 'backend/home.html', {'sections': sections})
+def home_list(request):
+    sections = Section.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    return render(request, 'backend/home.html', {'sections': sections})
+
+def homeSection_new(request):
+    if request.method == "POST":
+        form = PostSection(request.POST)
+        if form.is_valid():
+            section = form.save(commit=False)
+            section.author = request.user
+            section.published_date = timezone.now()
+            section.save()
+            return redirect('home_list')#, pk=post.pk)
+    else:
+        form = PostSection()
+    return render(request, 'backend/section_edit.html', {'form': form})
+
+def algSection_new(request):
+    if request.method == "POST":
+        form = PostSection(request.POST)
+        if form.is_valid():
+            section = form.save(commit=False)
+            section.author = request.user
+            section.published_date = timezone.now()
+            section.save()
+            return redirect('home_list')#, pk=post.pk)
+    else:
+        form = PostSection()
+    return render(request, 'backend/section_edit.html', {'form': form})
+
+def homeSection_detail(request, pk):
+    section = get_object_or_404(Section, pk=pk)
+    return render(request, 'backend/section_detail.html', {'section': section})
 
 '''
 def post_detail(request, pk):
