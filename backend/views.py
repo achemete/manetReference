@@ -60,6 +60,11 @@ def section_edit(request, pk):
         form = PostSection(instance=section)
     return render(request, 'backend/section_edit.html', {'form': form})
 
+def section_remove(request, pk):
+    section = get_object_or_404(Section, pk=pk)
+    section.delete()
+    return redirect('home_list')
+
 def algSection_new(request):
     if request.method == "POST":
         form = PostSection(request.POST)

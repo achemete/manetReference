@@ -9,6 +9,7 @@
             </div>
         {% endif %}
         <a class="btn btn-default" href="{% url 'section_edit' pk=section.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        <a class="btn btn-default" href="{% url 'section_remove' pk=section.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
         <h1>{{ section.title }}</h1>
         <p>{{ section.text|linebreaksbr }}</p>
     </div>

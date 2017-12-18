@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^section/(?P<pk>\d+)/$', views.home_detail, name='home_detail'),
     url(r'^homesection/new/$', views.homeSection_new, name='homeSection_new'),
     url(r'^algsection/new/$', views.algSection_new, name='algSection_new'),
+    url(r'^section/(?P<pk>\d+)/remove/$', views.section_remove, name='section_remove'),
     url(r'^section/(?P<pk>\d+)/edit/$', views.section_edit, name='section_edit'),
 
 
