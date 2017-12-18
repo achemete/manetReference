@@ -15,7 +15,6 @@ pyparsing==2.0.1
 python-dateutil==1.5
 pytz==2013.7
 requests==2.18.4
-six==1.4.1
 twitter==1.12.1
 urllib3==1.22
 virtualenv==15.1.0
