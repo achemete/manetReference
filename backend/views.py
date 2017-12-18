@@ -4,10 +4,11 @@ from django.shortcuts import redirect, render
 
 # Create your views here.
 from django.utils import timezone
+from django.contrib.auth import login, authenticate
 from .models import Section
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView 
-from .forms import PostSection
+from .forms import PostSection, SignUpForm
 
 class HomePageView(TemplateView):
     template_name = "backend/home.html"
@@ -20,6 +21,9 @@ class BiblioPageView(TemplateView):
 
 class RefPageView(TemplateView):
     template_name = "backend/b-algs.html"
+
+class SignUpPageView(TemplateView):
+    template_name = "backend/signup.html"
 
 # def index(request):
 #     sections = Section.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
@@ -78,22 +82,16 @@ def algSection_new(request):
         form = PostSection()
     return render(request, 'backend/section_edit.html', {'form': form})
 
-'''
-def post_detail(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    return render(request, 'backend/post_detail.html', {'post': post})
-
-def post_new(request):
-    if request.method == "POST":
-        form = PostForm(request.POST)
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
         if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.published_date = timezone.now()
-            post.save()
-            return redirect('post_detail', pk=post.pk)
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('home_list')
     else:
-        form = PostForm()
-    return render(request, 'backend/post_edit.html', {'form': form})
-
-'''
+        form = SignUpForm()
+    return render(request, 'backend/signup.html', {'form': form})
