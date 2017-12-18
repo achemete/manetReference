@@ -6,15 +6,28 @@ from django.shortcuts import render
 from django.utils import timezone
 from .models import Section
 from django.shortcuts import render, get_object_or_404
+from django.views.generic import TemplateView 
 #from .forms import SectionForm
 
-def index(request):
-    sections = Section.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    return render(request, 'backend/index.html', {'sections': sections})
+class HomePageView(TemplateView):
+    template_name = "backend/home.html"
 
-def home_list(request):
-    sections = Section.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    return render(request, 'backend/home.html', {'sections': sections})
+class AlgsPageView(TemplateView):
+    template_name = "backend/algs.html"
+
+class BiblioPageView(TemplateView):
+    template_name = "backend/biblio.html"
+
+class RefPageView(TemplateView):
+    template_name = "backend/b-algs.html"
+
+# def index(request):
+#     sections = Section.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+#     return render(request, 'backend/index.html', {'sections': sections})
+
+# def home_list(request):
+#     sections = Section.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+#     return render(request, 'backend/home.html', {'sections': sections})
 
 '''
 def post_detail(request, pk):
