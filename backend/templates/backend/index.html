@@ -55,10 +55,17 @@
 					<li><a class="btn disabled" id="handson" href="#">Hands-on Approach</a></li>
 					<li><a id="biblio" href="{% url 'biblio' %}">Bibliography</a></li>
 				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a id="signup" class="btn" href="{% url 'signup' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-					<li><a id="login" href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-				</ul>
+				{% if user.is_authenticated %}
+						<ul class="nav navbar-nav navbar-right">
+							<li><a id="login" href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
+						</ul>
+				{% else %}
+					<ul class="nav navbar-nav navbar-right">
+						<li><a id="signup" class="btn" href="{% url 'signup' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+						<li><a id="login" href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+					</ul>
+				{% endif %}
+				
 			</div>
 		</div>
 	</nav>
