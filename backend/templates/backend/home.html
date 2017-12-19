@@ -61,13 +61,13 @@
 	</div>
 	<div class="col-right">
 
-		{% for sectionR in sectionsR %}
+		{% for section in sectionsR %}
 			{% if user.is_authenticated %}
-			<h3><a href="#">{{ sectionR.title }}</a></h3>
+			<h3><a href="{% url 'home_detail' pk=section.pk %}">{{ section.title }}</a></h3>
 			{% else %}
-			<h3>{{ sectionR.title }}</h3>
+			<h3>{{ section.title }}</h3>
 			{% endif %}
-			<p>{{ sectionR.text|linebreaksbr }}</p>
+			<p>{{ section.text|linebreaksbr }}</p>
 		{% endfor %}
 
 		<h3>Get Involved</h3>

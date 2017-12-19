@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^$', views.home_list, name='home_list'),
     url(r'^section/(?P<pk>\d+)/$', views.home_detail, name='home_detail'),
     url(r'^homesection/new/$', views.homeSection_new, name='homeSection_new'),
+    url(r'^homesectionr/new/$', views.homeSectionRight_new, name='homeSectionRight_new'), #new added
     url(r'^algsection/new/$', views.algSection_new, name='algSection_new'),
     url(r'^section/(?P<pk>\d+)/remove/$', views.section_remove, name='section_remove'),
     url(r'^section/(?P<pk>\d+)/edit/$', views.section_edit, name='section_edit'),
@@ -19,6 +20,7 @@ urlpatterns = [
 
     url(r'^backend/$', views.BackendPageView.as_view(), name='backend'), 
     url(r'^backend/operations$', views.OperationsPageView.as_view(), name='operations'), 
+    url(r'^backend/users$', views.list_users, name='list_users'), 
 
 
     url(r'^signup/$', views.signup, name='signup'),

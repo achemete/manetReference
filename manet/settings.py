@@ -82,10 +82,21 @@ WSGI_APPLICATION = 'manet.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+# 	'default': {
+# 		'ENGINE': 'django.db.backends.postgresql_psycopg2',
+# 		'NAME': 'manetref',
+# 		'USER': 'manetdjango',
+# 		'PASSWORD': 'manetdjango',
+# 		'HOST': 'localhost',
+# 		'PORT': '',
+# 	}
+# }
+
 DATABASES = {
 	'default': {
 		'ENGINE': 'django.db.backends.postgresql_psycopg2',
-		'NAME': 'manetref',
+		'NAME': 'manetrefpro',
 		'USER': 'manetdjango',
 		'PASSWORD': 'manetdjango',
 		'HOST': 'localhost',

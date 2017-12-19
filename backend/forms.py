@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Section #, SectionR
+from .models import Section, Sectionright
 
 class PostSection(forms.ModelForm):
 
@@ -18,8 +18,3 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
 
-# class PostSectionR(forms.ModelForm):
-
-#     class Meta:
-#         model = SectionR
-#         fields = ('title', 'text',)
