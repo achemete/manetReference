@@ -28,13 +28,17 @@ class SignUpPageView(TemplateView):
 class BackendPageView(TemplateView):
 	template_name = "backend/backend.html"
 
+class OperationsPageView(TemplateView):
+	template_name = "backend/operations.html"
+
 # def index(request):
 #     sections = Section.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
 #     return render(request, 'backend/index.html', {'sections': sections})
 
 def home_list(request):
 	sections = Section.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-	return render(request, 'backend/home.html', {'sections': sections})
+	#sectionsR = SectionR.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+	return render(request, 'backend/home.html', {'sections': sections})#, 'sectionsR': sectionsR})
 
 def home_detail(request, pk):
 	section = get_object_or_404(Section, pk=pk)

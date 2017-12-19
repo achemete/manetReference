@@ -1,5 +1,8 @@
 console.log("I should load circles");
-let temp = parseInt($(".circle span").text())
+console.log($('.circle'));
+var temp = $('.circle').data('value');
+console.log(parseInt($(".circle span").text()));
+console.log(temp);
 $('.circle').circleProgress({
     fill: {gradient: ['red', 'orange']},
     startAngle: -Math.PI / 2,

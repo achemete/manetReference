@@ -1,1 +1,1 @@
-web: gunicorn manet.wsgi --log-file -
+web: gunicorn manet:app --log-file=-

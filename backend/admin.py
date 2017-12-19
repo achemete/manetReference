@@ -6,5 +6,9 @@ from django.contrib import admin
 # Register your models here.
 
 from .models import Section
+#, SectionR, other models
 
 admin.site.register(Section)
+#admin.site.register(SectionR)
+#admin.site.register(AlgsL)
+#admin.site.register(etc)

@@ -18,6 +18,8 @@ urlpatterns = [
     url(r'^biblio/algorithms/$', views.BiblioPageView.as_view(), name='b-algs'),
 
     url(r'^backend/$', views.BackendPageView.as_view(), name='backend'), 
+    url(r'^backend/operations$', views.OperationsPageView.as_view(), name='operations'), 
+
 
     url(r'^signup/$', views.signup, name='signup'),
 
