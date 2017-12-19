@@ -1,1 +1,1 @@
-web: gunicorn backend:app --log-file=-
+web: gunicorn manetRef:manet --log-file-
