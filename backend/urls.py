@@ -17,6 +17,8 @@ urlpatterns = [
     url(r'^biblio/$', views.BiblioPageView.as_view(), name='biblio'),
     url(r'^biblio/algorithms/$', views.BiblioPageView.as_view(), name='b-algs'),
 
+    url(r'^backend/$', views.BackendPageView.as_view(), name='backend'), 
+
     url(r'^signup/$', views.signup, name='signup'),
 
     url(r'^accounts/', include('django.contrib.auth.urls')),
