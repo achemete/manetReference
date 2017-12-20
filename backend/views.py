@@ -47,6 +47,10 @@ def home_detail(request, pk):
 	section = get_object_or_404(Section, pk=pk)
 	return render(request, 'backend/home_detail.html', {'section': section})
 
+def homeR_detail(request, pk):
+	sectionR = get_object_or_404(Sectionright, pk=pk)
+	return render(request, 'backend/homeR_detail.html', {'sectionR': sectionR})
+
 def homeSection_new(request):
 	if request.method == "POST":
 		form = PostSection(request.POST)
@@ -104,20 +108,6 @@ def algSection_new(request):
 	else:
 		form = PostSection()
 	return render(request, 'backend/section_edit.html', {'form': form})
-
-# def signup(request):
-# 	if request.method == 'POST':
-# 		form = SignUpForm(request.POST)
-# 		if form.is_valid():
-# 			form.save()
-# 			username = form.cleaned_data.get('username')
-# 			raw_password = form.cleaned_data.get('password1')
-# 			user = authenticate(username=username, password=raw_password)
-# 			login(request, user)
-# 			return redirect('home_list')
-# 	else:
-# 		form = SignUpForm()
-# 	return render(request, 'backend/signup.html', {'form': form})
 
 def signup(request):
     if request.method == 'POST':

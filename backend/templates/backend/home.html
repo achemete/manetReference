@@ -63,7 +63,7 @@
 
 		{% for section in sectionsR %}
 			{% if user.is_authenticated %}
-			<h3><a href="{% url 'home_detail' pk=section.pk %}">{{ section.title }}</a></h3>
+			<h3><a href="{% url 'homeR_detail' pk=section.pk %}">{{ section.title }}</a></h3>
 			{% else %}
 			<h3>{{ section.title }}</h3>
 			{% endif %}
