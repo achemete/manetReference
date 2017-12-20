@@ -72,7 +72,7 @@ def homeSectionRight_new(request):
 			sectionR.author = request.user
 			sectionR.published_date = timezone.now()
 			sectionR.save()
-			return redirect('home_detail', pk=sectionR.pk)
+			return redirect('homeR_detail', pk=sectionR.pk)
 	else:
 		form = PostSectionr()
 	return render(request, 'backend/section_edit.html', {'form': form})
@@ -93,6 +93,25 @@ def section_edit(request, pk):
 
 def section_remove(request, pk):
 	section = get_object_or_404(Section, pk=pk)
+	section.delete()
+	return redirect('home_list')
+
+def sectionR_edit(request, pk):
+	section = get_object_or_404(Sectionright, pk=pk)
+	if request.method == "POST":
+		form = PostSectionr(request.POST, instance=section)
+		if form.is_valid():
+			section = form.save(commit=False)
+			section.author = request.user
+			section.published_date = timezone.now()
+			section.save()
+			return redirect('homeR_detail', pk=section.pk)
+	else:
+		form = PostSectionr(instance=section)
+	return render(request, 'backend/sectionR_edit.html', {'form': form})
+
+def sectionR_remove(request, pk):
+	section = get_object_or_404(Sectionright, pk=pk)
 	section.delete()
 	return redirect('home_list')
 

@@ -12,6 +12,8 @@ urlpatterns = [
     url(r'^algsection/new/$', views.algSection_new, name='algSection_new'),
     url(r'^section/(?P<pk>\d+)/remove/$', views.section_remove, name='section_remove'),
     url(r'^section/(?P<pk>\d+)/edit/$', views.section_edit, name='section_edit'),
+    url(r'^sectionr/(?P<pk>\d+)/remove/$', views.sectionR_remove, name='sectionRight_remove'),
+    url(r'^sectionr/(?P<pk>\d+)/edit/$', views.sectionR_edit, name='sectionRight_edit'),
 
     #url(r'^$', views.HomePageView.as_view(), name='home'), ### using static home
 
