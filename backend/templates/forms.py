@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Section
+from .models import Section, Sectionright
 
 class PostSection(forms.ModelForm):
 

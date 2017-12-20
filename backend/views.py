@@ -11,7 +11,7 @@ from django.utils import timezone
 from .models import Section, Sectionright
 from django.views.generic import TemplateView 
 
-from .forms import PostSection, SignUpForm
+from .forms import PostSection, SignUpForm, PostSectionr
 
 class HomePageView(TemplateView):
 	template_name = "backend/home.html"
@@ -66,7 +66,7 @@ def homeSection_new(request):
 
 def homeSectionRight_new(request):
 	if request.method == "POST":
-		form = PostSection(request.POST)
+		form = PostSectionr(request.POST)
 		if form.is_valid():
 			sectionR = form.save(commit=False)
 			sectionR.author = request.user
@@ -74,7 +74,7 @@ def homeSectionRight_new(request):
 			sectionR.save()
 			return redirect('home_detail', pk=sectionR.pk)
 	else:
-		form = PostSection()
+		form = PostSectionr()
 	return render(request, 'backend/section_edit.html', {'form': form})
 
 def section_edit(request, pk):
