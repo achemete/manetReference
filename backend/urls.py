@@ -59,10 +59,22 @@ urlpatterns = [
 
     # -- content administration
 
-    #url(r'^$', views.home_list, name='home_list'), -----> list all homes content in a table
-    #url(r'^algorithms/$', views.algos_list, name='algos_list'), -----> list all algorithms' content in a table
+    url(r'^backend/content/home$', views.BackendHome_list, name='back_home_list'), #-----> list all homes content in a table
+    url(r'^backend/content/alg/$', views.BackendAlg_list, name='back_algs_list'), #-----> list all algorithms' content in a table
+    
+    url(r'^backend/content/home/new/$', views.BackendHome_new, name='back_home_new'),
+    url(r'^backend/content/homer/new/$', views.BackendHomeR_new, name='back_homeR_new'), 
+    url(r'^backend/content/home/(?P<pk>\d+)/edit/$', views.BackendHome_edit, name='back_home_edit'),
+    url(r'^backend/content/homer/(?P<pk>\d+)/edit/$', views.BackendHomeR_edit, name='back_homeR_edit'),
+    url(r'^backend/content/home/(?P<pk>\d+)/remove/$', views.BackendHome_remove, name='back_home_remove'),
+    url(r'^backend/content/homer/(?P<pk>\d+)/remove/$', views.BackendHomeR_remove, name='back_homeR_remove'),
 
-
+    url(r'^backend/content/alg/new/$', views.BackendAlg_new, name='back_alg_new'),
+    url(r'^backend/content/algr/new/$', views.BackendAlgR_new, name='back_algR_new'), 
+    url(r'^backend/content/alg/(?P<pk>\d+)/edit/$', views.BackendAlg_edit, name='back_alg_edit'),
+    url(r'^backend/content/algr/(?P<pk>\d+)/edit/$', views.BackendAlgR_edit, name='back_algR_edit'),
+    url(r'^backend/content/alg/(?P<pk>\d+)/remove/$', views.BackendAlg_remove, name='back_alg_remove'),
+    url(r'^backend/content/algr/(?P<pk>\d+)/remove/$', views.BackendAlgR_remove, name='back_algR_remove'),  
 
     # --- Other Views --- #
 

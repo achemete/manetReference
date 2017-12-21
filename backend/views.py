@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Section, Sectionright, Algoleft, Algoright
 from django.views.generic import TemplateView 
 
-from .forms import PostSection, SignUpForm, PostSectionr, PostAlgoLeft, PostAlgoRight#, BackHomeL, BackHomeR, BackAlgL, BackAlgR
+from .forms import PostSection, SignUpForm, PostSectionr, PostAlgoLeft, PostAlgoRight
 
 ####
 ## Template Views
@@ -205,15 +205,145 @@ def algRight_remove(request, pk):
 ## Backend Views
 ####
 
-# def home_list(request):
-# 	sections = Section.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-# 	sectionsR = Sectionright.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-# 	return render(request, 'backend/backhome.html', {'sections': sections, 'sectionsR': sectionsR})
+def BackendHome_list(request):
+	sections = Section.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+	sectionsR = Sectionright.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+	return render(request, 'backend/backend_home_list.html', {'sections': sections, 'sectionsR': sectionsR})
 
-# def algos_list(request):
-# 	sections = Algoleft.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-# 	sectionsR = Algoright.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-# 	return render(request, 'backend/backalgs.html', {'sections': sections, 'sectionsR': sectionsR})
+def BackendHome_new(request):
+	if request.method == "POST":
+		form = PostSection(request.POST)
+		if form.is_valid():
+			section = form.save(commit=False)
+			section.author = request.user
+			section.published_date = timezone.now()
+			section.save()
+			return redirect('back_home_detail', pk=section.pk)
+	else:
+		form = PostSection()
+	return render(request, 'backend/backend_home_new.html', {'form': form})
+
+def BackendHomeR_new(request):
+	if request.method == "POST":
+		form = PostSectionr(request.POST)
+		if form.is_valid():
+			sectionR = form.save(commit=False)
+			sectionR.author = request.user
+			sectionR.published_date = timezone.now()
+			sectionR.save()
+			return redirect('back_homeR_detail', pk=sectionR.pk)
+	else:
+		form = PostSectionr()
+	return render(request, 'backend/backend_homeR_new.html', {'form': form})
+
+def BackendHome_edit(request, pk):
+	section = get_object_or_404(Section, pk=pk)
+	if request.method == "POST":
+		form = PostSection(request.POST, instance=section)
+		if form.is_valid():
+			section = form.save(commit=False)
+			section.author = request.user
+			section.published_date = timezone.now()
+			section.save()
+			return redirect('back_home_detail', pk=section.pk)
+	else:
+		form = PostSection(instance=section)
+	return render(request, 'backend/backend_home_edit.html', {'form': form})
+
+def BackendHomeR_edit(request, pk):
+	section = get_object_or_404(Sectionright, pk=pk)
+	if request.method == "POST":
+		form = PostSectionr(request.POST, instance=section)
+		if form.is_valid():
+			section = form.save(commit=False)
+			section.author = request.user
+			section.published_date = timezone.now()
+			section.save()
+			return redirect('back_homeR_detail', pk=section.pk)
+	else:
+		form = PostSectionr(instance=section)
+	return render(request, 'backend/backend_homeR_edit.html', {'form': form})
+
+def BackendHome_remove(request, pk):
+	section = get_object_or_404(Section, pk=pk)
+	section.delete()
+	return redirect('back_home_list')
+
+def BackendHomeR_remove(request, pk):
+	section = get_object_or_404(Sectionright, pk=pk)
+	section.delete()
+	return redirect('back_home_list')
+
+#### Algs
+
+def BackendAlg_list(request):
+	sections = Algoleft.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+	sectionsR = Algoright.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+	return render(request, 'backend/backend_home_list.html', {'sections': sections, 'sectionsR': sectionsR})
+
+def BackendAlg_new(request):
+	if request.method == "POST":
+		form = PostAlgoLeft(request.POST)
+		if form.is_valid():
+			section = form.save(commit=False)
+			section.author = request.user
+			section.published_date = timezone.now()
+			section.save()
+			return redirect('back_home_detail', pk=section.pk)
+	else:
+		form = PostAlgoLeft()
+	return render(request, 'backend/backend_algos_new.html', {'form': form})
+
+def BackendAlgR_new(request):
+	if request.method == "POST":
+		form = PostAlgoRight(request.POST)
+		if form.is_valid():
+			sectionR = form.save(commit=False)
+			sectionR.author = request.user
+			sectionR.published_date = timezone.now()
+			sectionR.save()
+			return redirect('back_homeR_detail', pk=sectionR.pk)
+	else:
+		form = PostAlgoRight()
+	return render(request, 'backend/backend_algosR_new.html', {'form': form})
+
+def BackendAlg_edit(request, pk):
+	section = get_object_or_404(Algoleft, pk=pk)
+	if request.method == "POST":
+		form = PostSection(request.POST, instance=section)
+		if form.is_valid():
+			section = form.save(commit=False)
+			section.author = request.user
+			section.published_date = timezone.now()
+			section.save()
+			return redirect('back_home_detail', pk=section.pk)
+	else:
+		form = PostSection(instance=section)
+	return render(request, 'backend/backend_algoLeft_edit.html', {'form': form})
+
+def BackendAlgR_edit(request, pk):
+	section = get_object_or_404(Algoright, pk=pk)
+	if request.method == "POST":
+		form = PostSectionr(request.POST, instance=section)
+		if form.is_valid():
+			section = form.save(commit=False)
+			section.author = request.user
+			section.published_date = timezone.now()
+			section.save()
+			return redirect('back_homeR_detail', pk=section.pk)
+	else:
+		form = PostSectionr(instance=section)
+	return render(request, 'backend/backend_algoRight_edit.html', {'form': form})
+
+def BackendAlg_remove(request, pk):
+	section = get_object_or_404(Algoleft, pk=pk)
+	section.delete()
+	return redirect('back_home_list')
+
+def BackendAlgR_remove(request, pk):
+	section = get_object_or_404(Algoright, pk=pk)
+	section.delete()
+	return redirect('back_home_list')
 
 def list_users(request):
 	user = User.objects.all()
