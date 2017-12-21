@@ -20,6 +20,16 @@
 <hr>
 <div class="content-wrapper">
     <div class="col-left">
+
+        {% for section in sections %}
+            {% if user.is_authenticated %}
+            <h3><a href="{% url 'algol_detail' pk=section.pk %}">{{ section.title }}</a></h3>
+            {% else %}
+            <h3>{{ section.title }}</h3>
+            {% endif %}
+            <p>{{ section.text|linebreaksbr }}</p>
+        {% endfor %}
+
         <h3>Proactive Routing</h3>
         <p>
             This type of protocols maintains fresh lists of destinations and their routes by periodically distributing routing tables throughout the network. The main disadvantages of such algorithms are:
@@ -60,6 +70,16 @@
         <p></p>
     </div>
     <div class="col-right">
+
+        {% for section in sectionsR %}
+            {% if user.is_authenticated %}
+            <h3><a href="{% url 'algor_detail' pk=section.pk %}">{{ section.title }}</a></h3>
+            {% else %}
+            <h3>{{ section.title }}</h3>
+            {% endif %}
+            <p>{{ section.text|linebreaksbr }}</p>
+        {% endfor %}
+
         <h3>Hybrid Routing</h3>
         <p>
             This type of protocol combines the advantages of proactive and reactive routing. The routing is initially established with some proactively prospected routes and then serves the demand from additionally activated nodes through reactive flooding. The choice of one or the other method requires predetermination for typical cases.

@@ -1,0 +1,16 @@
+{% extends 'backend/index.html' %}
+{% load staticfiles %}
+
+{% block content %}
+ <div class="section">
+        {% if sectionR.published_date %}
+            <div class="date">
+                {{ sectionR.published_date }}
+            </div>
+        {% endif %}
+        <a class="btn btn-default" href="{% url 'algRight_edit' pk=sectionR.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        <a class="btn btn-default" href="{% url 'algRight_remove' pk=sectionR.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+        <h1>{{ sectionR.title }}</h1>
+        <p>{{ sectionR.text|linebreaksbr }}</p>
+    </div>
+{% endblock %}

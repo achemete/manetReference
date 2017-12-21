@@ -8,10 +8,15 @@ from django.contrib.auth.forms import UserCreationForm
 from django.utils import timezone
 # Create your views here.
 
-from .models import Section, Sectionright
+from django.contrib.auth.decorators import login_required
+from .models import Section, Sectionright, Algoleft, Algoright
 from django.views.generic import TemplateView 
 
-from .forms import PostSection, SignUpForm, PostSectionr
+from .forms import PostSection, SignUpForm, PostSectionr, PostAlgoLeft, PostAlgoRight#, BackHomeL, BackHomeR, BackAlgL, BackAlgR
+
+####
+## Template Views
+####
 
 class HomePageView(TemplateView):
 	template_name = "backend/home.html"
@@ -34,9 +39,9 @@ class BackendPageView(TemplateView):
 class OperationsPageView(TemplateView):
 	template_name = "backend/operations.html"
 
-# def index(request):
-#     sections = Section.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-#     return render(request, 'backend/index.html', {'sections': sections})
+####
+## Home Views
+####
 
 def home_list(request):
 	sections = Section.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
@@ -115,18 +120,108 @@ def sectionR_remove(request, pk):
 	section.delete()
 	return redirect('home_list')
 
-def algSection_new(request):
+####
+## Algorithms Views
+####
+
+def algos_list(request):
+	sections = Algoleft.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+	sectionsR = Algoright.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+	return render(request, 'backend/algs.html', {'sections': sections, 'sectionsR': sectionsR})
+
+def algol_detail(request, pk):
+	section = get_object_or_404(Algoleft, pk=pk)
+	return render(request, 'backend/algoL_detail.html', {'section': section})
+
+def algor_detail(request, pk):
+	sectionR = get_object_or_404(Algoright, pk=pk)
+	return render(request, 'backend/algoR_detail.html', {'sectionR': sectionR})
+
+def algLeft_new(request):
 	if request.method == "POST":
-		form = PostSection(request.POST)
+		form = PostAlgoLeft(request.POST)
 		if form.is_valid():
 			section = form.save(commit=False)
 			section.author = request.user
 			section.published_date = timezone.now()
 			section.save()
-			return redirect('home_list')#, pk=section.pk)
+			return redirect('algol_detail', pk=section.pk) 
 	else:
-		form = PostSection()
-	return render(request, 'backend/section_edit.html', {'form': form})
+		form = PostAlgoLeft()
+	return render(request, 'backend/algoLeft_edit.html', {'form': form})
+
+def algRight_new(request):
+	if request.method == "POST":
+		form = PostAlgoRight(request.POST)
+		if form.is_valid():
+			section = form.save(commit=False)
+			section.author = request.user
+			section.published_date = timezone.now()
+			section.save()
+			return redirect('algor_detail', pk=section.pk) 
+	else:
+		form = PostAlgoRight()
+	return render(request, 'backend/algoRight_edit.html', {'form': form})
+
+def algLeft_edit(request, pk):
+	section = get_object_or_404(Algoleft, pk=pk)
+	if request.method == "POST":
+		form = PostAlgoLeft(request.POST, instance=section)
+		if form.is_valid():
+			section = form.save(commit=False)
+			section.author = request.user
+			section.published_date = timezone.now()
+			section.save()
+			return redirect('algol_detail', pk=section.pk)
+	else:
+		form = PostAlgoLeft(instance=section)
+	return render(request, 'backend/algoLeft_edit.html', {'form': form})
+
+def algLeft_remove(request, pk):
+	section = get_object_or_404(Algoleft, pk=pk)
+	section.delete()
+	return redirect('algos_list')
+
+def algRight_edit(request, pk):
+	section = get_object_or_404(Algoright, pk=pk)
+	if request.method == "POST":
+		form = PostAlgoRight(request.POST, instance=section)
+		if form.is_valid():
+			section = form.save(commit=False)
+			section.author = request.user
+			section.published_date = timezone.now()
+			section.save()
+			return redirect('algor_detail', pk=section.pk)
+	else:
+		form = PostAlgoRight(instance=section)
+	return render(request, 'backend/algoRight_edit.html', {'form': form})
+
+def algRight_remove(request, pk):
+	section = get_object_or_404(Algoright, pk=pk)
+	section.delete()
+	return redirect('algos_list')
+
+####
+## Backend Views
+####
+
+# def home_list(request):
+# 	sections = Section.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+# 	sectionsR = Sectionright.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+# 	return render(request, 'backend/backhome.html', {'sections': sections, 'sectionsR': sectionsR})
+
+# def algos_list(request):
+# 	sections = Algoleft.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+# 	sectionsR = Algoright.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+# 	return render(request, 'backend/backalgs.html', {'sections': sections, 'sectionsR': sectionsR})
+
+def list_users(request):
+	user = User.objects.all()
+	return render(request, 'backend/list_users.html', {'user': user})
+
+####
+## Other Views
+####
 
 def signup(request):
     if request.method == 'POST':
@@ -142,6 +237,3 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'backend/signup.html', {'form': form})
 
-def list_users(request):
-	user = User.objects.all()
-	return render(request, 'backend/list_users.html', {'user': user})

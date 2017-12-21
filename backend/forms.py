@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Section, Sectionright
+from .models import Section, Sectionright, Algoleft, Algoright
 
 class PostSection(forms.ModelForm):
 
@@ -23,3 +23,18 @@ class PostSectionr(forms.ModelForm):
     class Meta:
         model = Sectionright
         fields = ('title', 'text',)
+
+class PostAlgoLeft(forms.ModelForm):
+
+    class Meta:
+        model = Algoleft
+        fields = ('title', 'text',)
+
+class PostAlgoRight(forms.ModelForm):
+
+    class Meta:
+        model = Algoright
+        fields = ('title', 'text',)
+
+# backend forms to create (at least)
+#BackHomeL, BackHomeR, BackAlgL, BackAlgR
