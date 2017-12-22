@@ -207,6 +207,8 @@ def algRight_remove(request, pk):
 ####
 ## Backend Views
 ####
+def backend_home(request):
+	return render(request, 'backend/back_end_home.html')
 
 def BackendHomeL_detail(request, pk):
 	section = get_object_or_404(Section, pk=pk)

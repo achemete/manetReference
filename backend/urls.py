@@ -53,7 +53,8 @@ urlpatterns = [
 
     # -- regular operations
 
-    url(r'^backend/$', login_required(views.BackendPageView.as_view()), name='backend'), 
+    # url(r'^backend/$', login_required(views.BackendPageView.as_view()), name='backend'), 
+    url(r'^backend/$', views.backend_home, name='backend_home'),
     url(r'^backend/operations$', login_required(views.OperationsPageView.as_view()), name='operations'), 
     url(r'^backend/users$', login_required(views.list_users), name='list_users'), 
 
