@@ -1,5 +1,4 @@
 var temp = $('.circle').data('value');
-console.log(parseInt($(".circle span").text()));
 $('.circle').circleProgress({
     fill: {gradient: ['red', 'orange']},
     startAngle: -Math.PI / 2,
