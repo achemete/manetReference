@@ -54,39 +54,39 @@ urlpatterns = [
     # -- regular operations
 
     url(r'^backend/$', login_required(views.BackendPageView.as_view()), name='backend'), 
-    url(r'^backend/operations$', views.OperationsPageView.as_view(), name='operations'), 
-    url(r'^backend/users$', views.list_users, name='list_users'), 
+    url(r'^backend/operations$', login_required(views.OperationsPageView.as_view()), name='operations'), 
+    url(r'^backend/users$', login_required(views.list_users), name='list_users'), 
 
     # -- content administration
 
-    url(r'^backend/content/home$', views.BackendHome_list, name='back_home_list'), #-----> list all homes content in a table
-    url(r'^backend/content/alg/$', views.BackendAlg_list, name='back_algs_list'), #-----> list all algorithms' content in a table
+    url(r'^backend/content/home$', login_required(views.BackendHome_list), name='back_home_list'), #-----> list all homes content in a table
+    url(r'^backend/content/alg/$', login_required(views.BackendAlg_list), name='back_algs_list'), #-----> list all algorithms' content in a table
     
-    url(r'^backend/content/home/(?P<pk>\d+)/$', views.BackendHomeL_detail, name='back_homeL_detail'),
-    url(r'^backend/content/homer/(?P<pk>\d+)/$', views.BackendHomeR_detail, name='back_homeR_detail'),
-    url(r'^backend/content/algl/(?P<pk>\d+)/$', views.BackendAlgL_detail, name='back_algL_detail'),
-    url(r'^backend/content/algr/(?P<pk>\d+)/$', views.BackendAlgR_detail, name='back_algR_detail'),
+    url(r'^backend/content/home/(?P<pk>\d+)/$', login_required(views.BackendHomeL_detail), name='back_homeL_detail'),
+    url(r'^backend/content/homer/(?P<pk>\d+)/$', login_required(views.BackendHomeR_detail), name='back_homeR_detail'),
+    url(r'^backend/content/algl/(?P<pk>\d+)/$', login_required(views.BackendAlgL_detail), name='back_algL_detail'),
+    url(r'^backend/content/algr/(?P<pk>\d+)/$', login_required(views.BackendAlgR_detail), name='back_algR_detail'),
 
-    url(r'^backend/content/home/new/$', views.BackendHome_new, name='back_home_new'),
-    url(r'^backend/content/homer/new/$', views.BackendHomeR_new, name='back_homeR_new'), 
-    url(r'^backend/content/home/(?P<pk>\d+)/edit/$', views.BackendHome_edit, name='back_home_edit'),
-    url(r'^backend/content/homer/(?P<pk>\d+)/edit/$', views.BackendHomeR_edit, name='back_homeR_edit'),
-    url(r'^backend/content/home/(?P<pk>\d+)/remove/$', views.BackendHome_remove, name='back_home_remove'),
-    url(r'^backend/content/homer/(?P<pk>\d+)/remove/$', views.BackendHomeR_remove, name='back_homeR_remove'),
+    url(r'^backend/content/home/new/$', login_required(views.BackendHome_new), name='back_home_new'),
+    url(r'^backend/content/homer/new/$', login_required(views.BackendHomeR_new), name='back_homeR_new'), 
+    url(r'^backend/content/home/(?P<pk>\d+)/edit/$', login_required(views.BackendHome_edit), name='back_home_edit'),
+    url(r'^backend/content/homer/(?P<pk>\d+)/edit/$', login_required(views.BackendHomeR_edit), name='back_homeR_edit'),
+    url(r'^backend/content/home/(?P<pk>\d+)/remove/$', login_required(views.BackendHome_remove), name='back_home_remove'),
+    url(r'^backend/content/homer/(?P<pk>\d+)/remove/$', login_required(views.BackendHomeR_remove), name='back_homeR_remove'),
 
-    url(r'^backend/content/alg/new/$', views.BackendAlgL_new, name='back_alg_new'),
-    url(r'^backend/content/algr/new/$', views.BackendAlgR_new, name='back_algR_new'), 
-    url(r'^backend/content/alg/(?P<pk>\d+)/edit/$', views.BackendAlg_edit, name='back_alg_edit'),
-    url(r'^backend/content/algr/(?P<pk>\d+)/edit/$', views.BackendAlgR_edit, name='back_algR_edit'),
-    url(r'^backend/content/alg/(?P<pk>\d+)/remove/$', views.BackendAlg_remove, name='back_alg_remove'),
-    url(r'^backend/content/algr/(?P<pk>\d+)/remove/$', views.BackendAlgR_remove, name='back_algR_remove'),  
+    url(r'^backend/content/alg/new/$', login_required(views.BackendAlgL_new), name='back_alg_new'),
+    url(r'^backend/content/algr/new/$', login_required(views.BackendAlgR_new), name='back_algR_new'), 
+    url(r'^backend/content/alg/(?P<pk>\d+)/edit/$', login_required(views.BackendAlg_edit), name='back_alg_edit'),
+    url(r'^backend/content/algr/(?P<pk>\d+)/edit/$', login_required(views.BackendAlgR_edit), name='back_algR_edit'),
+    url(r'^backend/content/alg/(?P<pk>\d+)/remove/$', login_required(views.BackendAlg_remove), name='back_alg_remove'),
+    url(r'^backend/content/algr/(?P<pk>\d+)/remove/$', login_required(views.BackendAlgR_remove), name='back_algR_remove'),  
 
     # --- Other Views --- #
 
     url(r'^signup/$', views.signup, name='signup'),
     url(r'^accounts/', include('django.contrib.auth.urls')),
-    url(r'^backend/accounts/delete$', views.to_del_user, name='to_del_user'),  
-    url(r'^backend/accounts/(?P<username>\d+)/delete/$', views.del_user, name='del_user'),  
+    url(r'^backend/accounts/delete$', login_required(views.to_del_user), name='to_del_user'),  
+    url(r'^backend/accounts/(?P<username>\d+)/delete/$', login_required(views.del_user), name='del_user'),  
 
 
     #url(r'^login/$', auth_views.login, {'backend': 'login.html'}, name='login'),

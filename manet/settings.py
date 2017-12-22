@@ -26,8 +26,7 @@ SECRET_KEY = '$@&&4p&tacs-z_zjy1+35yeh$h^^8=&ya!ummtpz3pv$%(_kig'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'achemete.pythonanywhere.com']
-
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '2id60.win.tue.nl', 'achemete.pythonanywhere.com']
 
 # Application definition
 
@@ -92,6 +91,35 @@ WSGI_APPLICATION = 'manet.wsgi.application'
 # 		'PORT': '',
 # 	}
 # }
+
+# DATABASES = {
+#      'default': {
+#          'ENGINE': 'django.db.backends.sqlite3',
+#          'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#      }
+# }
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': 'hmartine_djangomanet',
+#        'USER': 'hmartine_django',
+#        'PASSWORD': 'djangomanet',
+#        'HOST': 'hmartineztobar.es',
+#        'PORT': '3306',
+#    }
+#}
+
+#DATABASES = {
+#       'default': {
+#               'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#               'NAME': 'manetrefpro',
+#               'USER': 'manetdjango',
+#               'PASSWORD': 'manetdjango',
+#               'HOST': 'localhost',
+#               'PORT': '',
+#       }
+
 
 DATABASES = {
 	'default': {
