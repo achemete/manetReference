@@ -3,103 +3,51 @@
 
 {% block content %}
 
-<div class="content-wrapper">
-    <div class="col-left">
+<h4>Algorithm - Left Column</h4>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Date</th>
+      <th scope="col">Publisher</th>
+      <th scope="col">Operations</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for section in sections %}
+    <tr>
+      <th scope="row">{{ section.pk }}</th>
+      <td><a href="{% url 'algol_detail' pk=section.pk %}">{{ section.title }}</td>
+      <td>{{ section.published_date }}</td>
+      <td>@{{ section.author }}</td>
+      <td> <a class="glyphicon glyphicon-pencil" alt="Edit {{ section.title }}" href="{% url 'back_alg_edit' pk=section.pk %}"></a>
+        <a class="glyphicon glyphicon-trash" href="{% url 'back_alg_remove' pk=section.pk %}"></a></td>
+    </tr>
+    {% endfor %}
+</table>
 
-        {% for section in sections %}
-            {% if user.is_authenticated %}
-            <h3><a href="{% url 'algol_detail' pk=section.pk %}">{{ section.title }}</a></h3>
-            {% else %}
-            <h3>{{ section.title }}</h3>
-            {% endif %}
-            <p>{{ section.text|linebreaksbr }}</p>
-        {% endfor %}
-
-        <h3>Proactive Routing</h3>
-        <p>
-            This type of protocols maintains fresh lists of destinations and their routes by periodically distributing routing tables throughout the network. The main disadvantages of such algorithms are:
-            <ol class="tab">
-                <li>Respective amount of data for maintenance.</li>
-                <li>Slow reaction on restructuring and failures.</li>
-            </ol>
-            Examples of proactive algorithms are:
-            <ul class="tab">
-                <li>Optimized Link State Routing Protocol (OLSR) RFC 3626, RFC 7181.</li>
-                <li>Babel RFC 6126</li>
-                <li>Destination Sequence Distance Vector (DSDV)</li>
-                <li>DREAM</li>
-                <li>B.A.T.M.A.N.</li>
-            </ul>
-            <img src="{% static '../static/img/olsr.png' %}" alt="OLSR" width="60%">
-        </p>
-        <figcaption>OLSR Routing Protocol Map</figcaption>
-        <p></p>
-        <h3>Reactive Routing</h3>
-        <p>
-            This type of protocol finds a route on demand by flooding the network with Route Request packets. The main disadvantages of such algorithms are:
-            <ol class="tab">
-                <li>High latency time in route finding.</li>
-                <li>Excessive flooding can lead to network clogging.</li>
-            </ol>
-            Examples of on-demand algorithms are:
-            <ul class="tab">
-                <li>ABR - Associativity-Based Routing</li>
-                <li>Ad hoc On-demand Distance Vector(AODV) (RFC 3561)</li>
-                <li>Dynamic Source Routing (RFC 4728)</li>
-                <li>Flow State in the Dynamic Source Routing[5]</li>
-                <li>Power-Aware DSR-based</li>
-            </ul>
-            <img src="{% static '../static/img/aodv.jpg' %}" alt="AODV" width="75%">
-        </p>
-        <figcaption>AODV Routing Protocol Topology</figcaption>
-        <p></p>
-    </div>
-    <div class="col-right">
-
-        {% for section in sectionsR %}
-            {% if user.is_authenticated %}
-            <h3><a href="{% url 'algor_detail' pk=section.pk %}">{{ section.title }}</a></h3>
-            {% else %}
-            <h3>{{ section.title }}</h3>
-            {% endif %}
-            <p>{{ section.text|linebreaksbr }}</p>
-        {% endfor %}
-
-        <h3>Hybrid Routing</h3>
-        <p>
-            This type of protocol combines the advantages of proactive and reactive routing. The routing is initially established with some proactively prospected routes and then serves the demand from additionally activated nodes through reactive flooding. The choice of one or the other method requires predetermination for typical cases.
-            <br> The main disadvantages of such algorithms are:
-            <ol class="tab">
-                <li>Advantage depends on number of other nodes activated.</li>
-                <li>Reaction to traffic demand depends on gradient of traffic volume.</li>
-            </ol>
-            Examples of hybrid algorithms are:
-            <ul class="tab">
-                <li>ZRP (Zone Routing Protocol)[7] ZRP uses IARP as pro-active and IERP as reactive component.</li>
-                <li>ZHLS (Zone-based Hierarchical Link State Routing Protocol)</li>
-            </ul>
-            <img src="{% static '../static/img/zonerouting.jpg' %}" alt="" width="65%">
-        </p>
-        <figcaption>ZRL Routing Protocol</figcaption>
-        <p></p>
-        <h3>Hierarchical Routing</h3>
-        <p>
-            With this type of protocol the choice of proactive and of reactive routing depends on the hierarchic level in which a node resides. The routing is initially established with some proactively prospected routes and then serves the demand from additionally activated nodes through reactive flooding on the lower levels. The choice for one or the other method requires proper attributation for respective levels. The main disadvantages of such algorithms are:
-            <ol class="tab">
-                <li>Advantage depends on depth of nesting and addressing scheme.</li>
-                <li>Reaction to traffic demand depends on meshing parameters.</li>
-            </ol>
-            Examples of hierarchical routing algorithms are:
-            <ul class="tab">
-                <li>CBRP (Cluster Based Routing Protocol)</li>
-                <li>FSR (Fisheye State Routing protocol)</li>
-                <li>Order One Network Protocol; Fast logarithm-of-2 maximum times to contact nodes. Supports large groups.</li>
-                <li>ZHLS (Zone-based Hierarchical Link State Routing Protocol)</li>
-            </ul>
-            <img src="{% static '../static/img/hierarchical.jpg' %}" alt="" width="45%">
-        </p>
-        <figcaption>Hierarchical Routing Protocol Topology</figcaption>
-        <p></p>
-    </div>
-</div>
+<h4>Algorithm - Right Column</h4>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Date</th>
+      <th scope="col">Publisher</th>
+      <th scope="col">Operations</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for section in sectionsR %}
+    <tr>
+      <th scope="row">{{ section.pk }}</th>
+      <td><a href="{% url 'algor_detail' pk=section.pk %}">{{ section.title }}</td>
+      <td>{{ section.published_date }}</td>
+      <td>@{{ section.author }}</td>
+      <td> <a class="glyphicon glyphicon-pencil" alt="Edit {{ section.title }}" href="{% url 'back_algR_edit' pk=section.pk %}"></a>
+        <a class="glyphicon glyphicon-trash" href="{% url 'back_algR_remove' pk=section.pk %}"></a></td>
+    </tr>
+    {% endfor %}
+   </table>
 {% endblock %}

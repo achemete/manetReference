@@ -62,6 +62,11 @@ urlpatterns = [
     url(r'^backend/content/home$', views.BackendHome_list, name='back_home_list'), #-----> list all homes content in a table
     url(r'^backend/content/alg/$', views.BackendAlg_list, name='back_algs_list'), #-----> list all algorithms' content in a table
     
+    url(r'^backend/content/home/(?P<pk>\d+)/$', views.BackendHomeL_detail, name='back_homeL_detail'),
+    url(r'^backend/content/homer/(?P<pk>\d+)/$', views.BackendHomeR_detail, name='back_homeR_detail'),
+    url(r'^backend/content/algl/(?P<pk>\d+)/$', views.BackendAlgL_detail, name='back_algL_detail'),
+    url(r'^backend/content/algr/(?P<pk>\d+)/$', views.BackendAlgR_detail, name='back_algR_detail'),
+
     url(r'^backend/content/home/new/$', views.BackendHome_new, name='back_home_new'),
     url(r'^backend/content/homer/new/$', views.BackendHomeR_new, name='back_homeR_new'), 
     url(r'^backend/content/home/(?P<pk>\d+)/edit/$', views.BackendHome_edit, name='back_home_edit'),
@@ -69,7 +74,7 @@ urlpatterns = [
     url(r'^backend/content/home/(?P<pk>\d+)/remove/$', views.BackendHome_remove, name='back_home_remove'),
     url(r'^backend/content/homer/(?P<pk>\d+)/remove/$', views.BackendHomeR_remove, name='back_homeR_remove'),
 
-    url(r'^backend/content/alg/new/$', views.BackendAlg_new, name='back_alg_new'),
+    url(r'^backend/content/alg/new/$', views.BackendAlgL_new, name='back_alg_new'),
     url(r'^backend/content/algr/new/$', views.BackendAlgR_new, name='back_algR_new'), 
     url(r'^backend/content/alg/(?P<pk>\d+)/edit/$', views.BackendAlg_edit, name='back_alg_edit'),
     url(r'^backend/content/algr/(?P<pk>\d+)/edit/$', views.BackendAlgR_edit, name='back_algR_edit'),
@@ -80,6 +85,9 @@ urlpatterns = [
 
     url(r'^signup/$', views.signup, name='signup'),
     url(r'^accounts/', include('django.contrib.auth.urls')),
+    url(r'^backend/accounts/delete$', views.to_del_user, name='to_del_user'),  
+    url(r'^backend/accounts/(?P<username>\d+)/delete/$', views.del_user, name='del_user'),  
+
 
     #url(r'^login/$', auth_views.login, {'backend': 'login.html'}, name='login'),
     #url(r'^logout/$', auth_views.logout, {'backend': 'logout.html'}, name='logout'),

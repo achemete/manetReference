@@ -9,8 +9,11 @@ from django.utils import timezone
 # Create your views here.
 
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
+
 from .models import Section, Sectionright, Algoleft, Algoright
 from django.views.generic import TemplateView 
+
 
 from .forms import PostSection, SignUpForm, PostSectionr, PostAlgoLeft, PostAlgoRight
 
@@ -205,6 +208,14 @@ def algRight_remove(request, pk):
 ## Backend Views
 ####
 
+def BackendHomeL_detail(request, pk):
+	section = get_object_or_404(Section, pk=pk)
+	return render(request, 'backend/backend_homeL_detail.html', {'section': section})
+
+def BackendHomeR_detail(request, pk):
+	sectionR = get_object_or_404(Sectionright, pk=pk)
+	return render(request, 'backend/backend_homeR_detail.html', {'sectionR': sectionR})
+
 def BackendHome_list(request):
 	sections = Section.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
 	sectionsR = Sectionright.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
@@ -218,7 +229,7 @@ def BackendHome_new(request):
 			section.author = request.user
 			section.published_date = timezone.now()
 			section.save()
-			return redirect('back_home_detail', pk=section.pk)
+			return redirect('back_homeL_detail', pk=section.pk)
 	else:
 		form = PostSection()
 	return render(request, 'backend/backend_home_new.html', {'form': form})
@@ -245,7 +256,7 @@ def BackendHome_edit(request, pk):
 			section.author = request.user
 			section.published_date = timezone.now()
 			section.save()
-			return redirect('back_home_detail', pk=section.pk)
+			return redirect('back_homeL_detail', pk=section.pk)
 	else:
 		form = PostSection(instance=section)
 	return render(request, 'backend/backend_home_edit.html', {'form': form})
@@ -276,12 +287,20 @@ def BackendHomeR_remove(request, pk):
 
 #### Algs
 
+def BackendAlgR_detail(request, pk):
+	sectionR = get_object_or_404(Algoright, pk=pk)
+	return render(request, 'backend/backend_algoR_detail.html', {'sectionR': sectionR})
+
+def BackendAlgL_detail(request, pk):
+	section = get_object_or_404(Algoleft, pk=pk)
+	return render(request, 'backend/backend_algoL_detail.html', {'section': section})
+
 def BackendAlg_list(request):
 	sections = Algoleft.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
 	sectionsR = Algoright.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-	return render(request, 'backend/backend_home_list.html', {'sections': sections, 'sectionsR': sectionsR})
+	return render(request, 'backend/backend_algs_list.html', {'sections': sections, 'sectionsR': sectionsR})
 
-def BackendAlg_new(request):
+def BackendAlgL_new(request):
 	if request.method == "POST":
 		form = PostAlgoLeft(request.POST)
 		if form.is_valid():
@@ -289,7 +308,7 @@ def BackendAlg_new(request):
 			section.author = request.user
 			section.published_date = timezone.now()
 			section.save()
-			return redirect('back_home_detail', pk=section.pk)
+			return redirect('back_algL_detail', pk=section.pk)
 	else:
 		form = PostAlgoLeft()
 	return render(request, 'backend/backend_algos_new.html', {'form': form})
@@ -302,7 +321,7 @@ def BackendAlgR_new(request):
 			sectionR.author = request.user
 			sectionR.published_date = timezone.now()
 			sectionR.save()
-			return redirect('back_homeR_detail', pk=sectionR.pk)
+			return redirect('back_algR_detail', pk=sectionR.pk)
 	else:
 		form = PostAlgoRight()
 	return render(request, 'backend/backend_algosR_new.html', {'form': form})
@@ -316,7 +335,7 @@ def BackendAlg_edit(request, pk):
 			section.author = request.user
 			section.published_date = timezone.now()
 			section.save()
-			return redirect('back_home_detail', pk=section.pk)
+			return redirect('back_algL_detail', pk=section.pk)
 	else:
 		form = PostSection(instance=section)
 	return render(request, 'backend/backend_algoLeft_edit.html', {'form': form})
@@ -330,7 +349,7 @@ def BackendAlgR_edit(request, pk):
 			section.author = request.user
 			section.published_date = timezone.now()
 			section.save()
-			return redirect('back_homeR_detail', pk=section.pk)
+			return redirect('back_algR_detail', pk=section.pk)
 	else:
 		form = PostSectionr(instance=section)
 	return render(request, 'backend/backend_algoRight_edit.html', {'form': form})
@@ -338,12 +357,12 @@ def BackendAlgR_edit(request, pk):
 def BackendAlg_remove(request, pk):
 	section = get_object_or_404(Algoleft, pk=pk)
 	section.delete()
-	return redirect('back_home_list')
+	return redirect('back_algs_list')
 
 def BackendAlgR_remove(request, pk):
 	section = get_object_or_404(Algoright, pk=pk)
 	section.delete()
-	return redirect('back_home_list')
+	return redirect('back_algs_list')
 
 def list_users(request):
 	user = User.objects.all()
@@ -352,6 +371,10 @@ def list_users(request):
 ####
 ## Other Views
 ####
+
+def to_del_user(request):
+	user = User.objects.all()
+	return render(request, 'backend/backend_delete_users.html', {'user': user})
 
 def signup(request):
     if request.method == 'POST':
@@ -366,4 +389,20 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'backend/signup.html', {'form': form})
+
+@staff_member_required 
+def del_user(request, username):    
+    try:
+        user = User.objects.get(username = username)
+        user.delete()
+        messages.sucess(request, "The user is deleted")            
+
+    except User.DoesNotExist:
+        messages.error(request, "User doesnot exist")    
+        return render(request, 'backend/backend.html')
+
+    except Exception as e: 
+        return render(request, 'backend/backend.html',{'err':e.message})
+
+    return render(request, 'backend/backend.html') 
 
